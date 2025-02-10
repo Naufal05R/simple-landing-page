@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <main className="flex flex-col gap-8 items-center">
         <Image
-          src="/assets/thumbnail.png"
+          src="/assets/images/thumbnail.png"
           alt="thumbnail"
           width={1920}
           height={1080}
@@ -41,7 +41,7 @@ export default function Home() {
           {Array.from({ length: 3 }).map((_, i) => (
             <Image
               key={i}
-              src={`/assets/produk/best-seller/${i + 1}.webp`}
+              src={`/assets/images/produk/best-seller/${i + 1}.webp`}
               alt="produk"
               width={720}
               height={720}
@@ -56,7 +56,7 @@ export default function Home() {
           {Array.from({ length: 9 }).map((_, i) => (
             <Image
               key={i}
-              src={`/assets/produk/${i + 1}.webp`}
+              src={`/assets/images/produk/${i + 1}.webp`}
               alt="produk"
               width={720}
               height={720}
