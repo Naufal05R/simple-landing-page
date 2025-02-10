@@ -1,11 +1,12 @@
 import { benefits } from "@/constants/benefits";
+import { offers } from "@/constants/offers";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-      <main className="flex flex-col gap-8 items-center">
+      <main className="pb-20 flex flex-col gap-8 items-center bg-white">
         <Image
           src="/assets/images/thumbnail.png"
           alt="thumbnail"
@@ -69,9 +70,9 @@ export default function Home() {
           Keuntungan Gabung Mitra
         </h3>
         <div className="flex flex-wrap justify-center">
-          {benefits.map(({ title, description, Icon }, i) => (
+          {benefits.map(({ title, description, Icon }) => (
             <div
-              key={i}
+              key={title}
               className="min-[450px]:basis-1/2 md:basis-1/3 flex flex-col items-center text-center min-[450px]:p-4 md:p-8"
             >
               <Icon size={50} className="text-red-500" />
@@ -86,19 +87,62 @@ export default function Home() {
         <h3 className="text-center font-bold text-2xl lg:text-4xl">
           Paket Mitra
         </h3>
-        <div className="flex flex-wrap justify-center">
-          {benefits.map(({ title, description, Icon }, i) => (
-            <div
-              key={i}
-              className="min-[450px]:basis-1/2 md:basis-1/3 flex flex-col items-center text-center min-[450px]:p-4 md:p-8"
-            >
-              <Icon size={50} className="text-red-500" />
-              <h4 className="text-2xl lg:text-4xl text-red-300 font-medium">
-                {title}
-              </h4>
-              <p>{description}</p>
-            </div>
-          ))}
+        <div className="w-full flex flex-wrap justify-center bg-transparent">
+          {offers.map(
+            ({
+              title,
+              price,
+              amplifier,
+              discount,
+              descriptions,
+              url,
+              recommended,
+            }) => (
+              <div
+                key={title}
+                className="min-[450px]:basis-1/2 md:basis-1/3 min-[450px]:p-1.5 md:p-3 bg-transparent"
+              >
+                <div className="relative overflow-clip text-neutral-800 rounded-2xl flex flex-col items-center text-center min-[450px]:p-4 md:p-8 shadow-[0_10px_60px_10px_theme(colors.indigo.200)]">
+                  <div
+                    className={`w-1/2 aspect-square absolute -top-20 -right-20 grid place-items-center ${
+                      !recommended && "hidden"
+                    }`}
+                  >
+                    <span className="py-1 w-full rotate-45 uppercase text-xs font-semibold tracking-tighter text-white text-center bg-red-500 shadow-lg">
+                      Recommended
+                    </span>
+                  </div>
+                  <h4 className="text-xl lg:text-2xl text-red-500 font-black">
+                    {title}
+                  </h4>
+                  <p className="text-2xl lg:text-4xl font-bold">
+                    <s className="text-xl lg:text-2xl">
+                      Rp. {price}
+                      {amplifier}
+                    </s>{" "}
+                    Rp.{" "}
+                    {price -
+                      (price * Math.min(100, Math.max(0, discount))) / 100}
+                    {amplifier}
+                  </p>
+                  <ul className="mt-4 ">
+                    {descriptions.map((description) => (
+                      <li key={description} className="list-disc text-left">
+                        {description}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={url}
+                    target="_blank"
+                    className="mt-8 w-full bg-red-500 rounded-full px-7 py-3.5 font-bold text-center text-white"
+                  >
+                    Daftar Sekarang
+                  </Link>
+                </div>
+              </div>
+            )
+          )}
         </div>
       </main>
       <footer className="flex gap-6 flex-wrap items-center justify-center"></footer>
